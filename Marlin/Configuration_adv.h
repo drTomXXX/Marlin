@@ -931,7 +931,7 @@
 //#define HOMING_BACKOFF_POST_MM { 2, 2, 2 }  // (linear=mm, rotational=°) Backoff from endstops after homing
 //#define XY_COUNTERPART_BACKOFF_MM 0         // (mm) Backoff X after homing Y, and vice-versa
 
-//#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
+#define QUICK_HOME                          // If G28 contains XY do a diagonal move first
 //#define HOME_Y_BEFORE_X                     // If G28 contains XY home Y before X
 //#define HOME_Z_FIRST                        // Home Z first. Requires a real endstop (not a probe).
 //#define CODEPENDENT_XY_HOMING               // If X/Y can't home without homing Y/X first
@@ -956,7 +956,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  //#define BLTOUCH_DELAY 500
+  #define BLTOUCH_DELAY 700
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -982,7 +982,7 @@
    * differs, a mode set EEPROM write will be completed at initialization.
    * Use the option below to force an EEPROM write to a V3.1 probe regardless.
    */
-  //#define BLTOUCH_SET_5V_MODE
+  #define BLTOUCH_SET_5V_MODE
 
   // Safety: Enable voltage mode settings in the LCD menu.
   //#define BLTOUCH_LCD_VOLTAGE_MENU
@@ -1071,7 +1071,7 @@
 
   // On a 300mm bed a 5% grade would give a misalignment of ~1.5cm
   #define G34_MAX_GRADE              5    // (%) Maximum incline that G34 will handle
-  #define Z_STEPPER_ALIGN_ITERATIONS 5    // Number of iterations to apply during alignment
+  #define Z_STEPPER_ALIGN_ITERATIONS 3    // Number of iterations to apply during alignment
   #define Z_STEPPER_ALIGN_ACC        0.02 // Stop iterating early if the accuracy is better than this
   #define RESTORE_LEVELING_AFTER_G34      // Restore leveling after G34 is done?
   // After G34, re-home Z (G28 Z) or just calculate it from the last probe heights?
@@ -1513,7 +1513,7 @@
   #endif
 
   // Include a page of printer information in the LCD Main Menu
-  //#define LCD_INFO_MENU
+  #define LCD_INFO_MENU
   #if ENABLED(LCD_INFO_MENU)
     //#define LCD_PRINTER_INFO_IS_BOOTSCREEN // Show bootscreen(s) instead of Printer Info pages
   #endif
@@ -1685,7 +1685,7 @@
   //#define SD_DETECT_STATE HIGH
 
   //#define SD_IGNORE_AT_STARTUP            // Don't mount the SD card when starting up
-  //#define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
+  #define SDCARD_READONLY                 // Read-only SD card (to save over 2K of flash)
 
   //#define GCODE_REPEAT_MARKERS            // Enable G-code M808 to set repeat markers and do looping
 
@@ -1792,7 +1792,7 @@
   //#define LONG_FILENAME_WRITE_SUPPORT   // Create / delete files with long filenames via M28, M30, and Binary Transfer Protocol
   //#define M20_TIMESTAMP_SUPPORT         // Include timestamps by adding the 'T' flag to M20 commands
 
-  //#define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
+  #define SCROLL_LONG_FILENAMES         // Scroll long filenames in the SD card menu
 
   //#define SD_ABORT_NO_COOLDOWN          // Leave the heaters on after Stop Print (not recommended!)
 
@@ -2234,18 +2234,18 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define EP_BABYSTEPPING                 // M293/M294 babystepping with EMERGENCY_PARSER support
   //#define BABYSTEP_WITHOUT_HOMING
   //#define BABYSTEP_ALWAYS_AVAILABLE       // Allow babystepping at all times (not just during movement)
   //#define BABYSTEP_XY                     // Also enable X/Y Babystepping. Not supported on DELTA!
-  //#define BABYSTEP_INVERT_Z               // Enable if Z babysteps should go the other way
+  #define BABYSTEP_INVERT_Z               // Enable if Z babysteps should go the other way
   //#define BABYSTEP_MILLIMETER_UNITS       // Specify BABYSTEP_MULTIPLICATOR_(XY|Z) in mm instead of micro-steps
-  #define BABYSTEP_MULTIPLICATOR_Z  1       // (steps or mm) Steps or millimeter distance for each Z babystep
+  #define BABYSTEP_MULTIPLICATOR_Z  10       // (steps or mm) Steps or millimeter distance for each Z babystep
   #define BABYSTEP_MULTIPLICATOR_XY 1       // (steps or mm) Steps or millimeter distance for each XY babystep
 
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
@@ -2929,7 +2929,7 @@
   #define INTERPOLATE      true
 
   #if AXIS_IS_TMC_CONFIG(X)
-    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       725        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
     #define X_MICROSTEPS     16        // 0..256
     #define X_RSENSE          0.11     // Multiplied x1000 for TMC26X
@@ -2949,7 +2949,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Y)
-    #define Y_CURRENT       800
+    #define Y_CURRENT       725
     #define Y_CURRENT_HOME  Y_CURRENT
     #define Y_MICROSTEPS     16
     #define Y_RSENSE          0.11
@@ -2969,7 +2969,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(Z)
-    #define Z_CURRENT       800
+    #define Z_CURRENT       725
     #define Z_CURRENT_HOME  Z_CURRENT
     #define Z_MICROSTEPS     16
     #define Z_RSENSE          0.11
@@ -3069,7 +3069,7 @@
   #endif
 
   #if AXIS_IS_TMC_CONFIG(E0)
-    #define E0_CURRENT      800
+    #define E0_CURRENT      900
     #define E0_MICROSTEPS    16
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
@@ -3260,7 +3260,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V        // All axes (override below)
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
@@ -3297,7 +3297,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -3314,12 +3314,12 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  #define HYBRID_THRESHOLD
 
-  #define X_HYBRID_THRESHOLD     100  // [mm/s]
-  #define X2_HYBRID_THRESHOLD    100
-  #define Y_HYBRID_THRESHOLD     100
-  #define Y2_HYBRID_THRESHOLD    100
+  #define X_HYBRID_THRESHOLD     152  // [mm/s]
+  #define X2_HYBRID_THRESHOLD    152
+  #define Y_HYBRID_THRESHOLD     152
+  #define Y2_HYBRID_THRESHOLD    152
   #define Z_HYBRID_THRESHOLD       3
   #define Z2_HYBRID_THRESHOLD      3
   #define Z3_HYBRID_THRESHOLD      3
@@ -3410,7 +3410,7 @@
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continuous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -4247,8 +4247,8 @@
    * If you add more debug displays, be careful to avoid conflicts!
    */
   #define MAX7219_DEBUG_PRINTER_ALIVE     // Blink corner LED of 8x8 matrix to show that the firmware is functioning
-  #define MAX7219_DEBUG_PLANNER_HEAD  2   // Show the planner queue head position on this and the next LED matrix row
-  #define MAX7219_DEBUG_PLANNER_TAIL  4   // Show the planner queue tail position on this and the next LED matrix row
+  #define MAX7219_DEBUG_PLANNER_HEAD  3   // Show the planner queue head position on this and the next LED matrix row
+  #define MAX7219_DEBUG_PLANNER_TAIL  5   // Show the planner queue tail position on this and the next LED matrix row
 
   #define MAX7219_DEBUG_PLANNER_QUEUE 0   // Show the current planner queue depth on this and the next LED matrix row
                                           // If you experience stuttering, reboots, etc. this option can reveal how
